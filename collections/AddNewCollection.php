@@ -110,7 +110,7 @@
                 </div>
 
                 <div class="col-75">
-                    <textarea name="Desc" style="height: 200px;"
+                    <textarea name="desc" style="height: 200px;"
                         placeholder="Write something"></textarea>
                 </div>
             </div>
@@ -128,7 +128,7 @@
             <div class="row">
                 <input type="reset" style="float:center;">
                 <input type="submit" value="Add Collection" name="addC">
-                <input type="submit" value="Back" name="back">
+                <input type="submit" value="Back" name="backBtn">
             </div>
 
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>FACILITY LIST </title>
+  <title>Collection List </title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
@@ -64,14 +64,14 @@
 </head>
 <body>
 <div class="w3-container">
-	<div><h1>List of Facility for Rental.</h1></div>
-<form action="a.php" methos="POST">
-	<input type="submit" value="Add new facility" id="design1">
+	<div><h1>List of Collections.</h1></div>
+<form action="AddNewCollection.php" methos="POST">
+	<input type="submit" value="Add new collection" id="design1">
 </form>
 <br>
 
 <?php
-include "";
+include "addFunction.php";
 // displaySearchOption();
 
 // 	if(isSet($_POST['searchByKemudahanButton']))
@@ -81,46 +81,44 @@ include "";
 // 	else if (isset($_POST['searchByKapasitiButton']))
 // 		$qryFacilityList = searchByKapasiti();
 // 	else 
-// 		$qryFacilityList = getListOfFacility();
+ 		$qryCollectionList = getListOfCollection();
 
-echo "<br>There are ". mysqli_num_rows($qryFacilityList). " facility record" ;
+echo "<br>There are ". mysqli_num_rows($qryCollectionList). " collection record" ;
 	echo '<table  id="customers">';
 			echo '<tr>
 						<th>No</th>
-						<th>ID No</th>
-						<th>Facility</th>
-						<th>Kapasiti(orang)</th>
-						<th>Kemudahan</th>
-						<th>Kadar Sewa(RM)</th>				
-						<th>Delete Facility</th>
+						<th>Category</th>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Date</th>		
+						<th>Picture</th>	
+						<th>Delete Collection</th>
 						<th>Update</th>
 				</tr>';
-			$count=1;
-			while($row = mysqli_fetch_assoc($qryFacilityList))
+			
+			while($row = mysqli_fetch_assoc($qryCollectionList))
 				{
-				 echo '<tr>';
-					echo'<td>'.$count.'</td>';
-					echo '<td>'.$row['id'].'</td>';
-					echo '<td>'.$row['ruang'].'</td>';
-					echo '<td>'.$row['kapasiti'].'</td>';
-					echo '<td>'.$row['kemudahan'].'</td>';
-					echo '<td style="text-align:center;">'.$row['kadarSewaHour'].' Sejam
-						<br>'.$row['kadarSewaHalfDay'].' 1/2 Hari
-						<br>'.$row['kadarSewaOneDay'].' Sehari <br>
-						</td>';
+				 	echo '<tr>';
+					echo'<td>'.$row['id'].'</td>';
+					echo '<td>'.$row['kategori'].'</td>';
+					echo '<td>'.$row['nama'].'</td>';
+					echo '<td>'.$row['desc'].'</td>';
 					
-
+					echo '<td style="text-align:center;">'.$row['date'].' </td>';
+						
+						  
+					echo '<td>'."<img src='./images/'".$row['gambar']."'>'".'</td>';
+						
 					$idSelected=$row['id'];
-
-					echo '<td style="text-align:center;"><form action="processFacility.php" method="POST">';
+					echo '<td style="text-align:center;"><form action=".php" method="POST">';
 						echo '<input type="hidden" name="idToDelete" 
 							value="'.$idSelected.'" >';
 
 						echo '<input type="submit" value="Delete" 
-						name="deleteFacilityButton" id="design4">';
+						name="deleteButton" id="design4">';
 					echo '</form>';
 					
-					echo '<td style="text-align:center;"><form action="UpdateFacilityForm.php" method="POST">';
+					echo '<td style="text-align:center;"><form action=".php" method="POST">';
 						echo '<input type="hidden" name="idToUpdate" 
 							value="'.$idSelected.'" >';
 
@@ -131,39 +129,16 @@ echo "<br>There are ". mysqli_num_rows($qryFacilityList). " facility record" ;
 					//echo '<td>'.$row['regDate'].'</td>';
 					 
 				 echo '</tr>';
-				 $count++;
+				 
 				}
 	echo '</table></div>
-<br><form action="processCustomer.php" method="POST">
+<br><form action="addProcess.php" method="POST">
 		<button type="submit" name="backBtn" id=design5>Back</button></form>';
 
 
 ?>
 
 <?php
-function displaySearchOption()
-{
-	echo '<form action="" method="POST">';
-
-		echo '<fieldset style="border-color:blue;"><legend >Search Option</legend>';
-			echo '<input type="text" name="searchKey" 
-				placeholder="Enter search value:">';
-
-			echo '<br><br><input type="submit" value="Search By Kapasiti"
-					name="searchByKapasitiButton" id="design2">';
-
-echo '<input type="submit" value="Search By Kemudahan"
-					name="searchByKemudahanButton" id="design3">';
-
-			echo '<br><br><input type="submit" value="Display All"
-					name="displayAllButton">';
-
-			
-					
-		echo '</fieldset>';
-	echo '</form><br>';
-	
-}
 ?>
 </div>
 </body>
