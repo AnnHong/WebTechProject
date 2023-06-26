@@ -14,22 +14,21 @@ class db
         return $dbConnection;
     }
 }
-
+$db = new db();
 
 function addNewCollections()
 {
 	//print_r($_POST);
 	//echo '<br>in addNewCar() function';
 	//1.connect to mysql
-	$con = mysqli_connect("localhost","web2021","web2021","webtechw10");
+	$con = mysqli_connect("localhost","root"," ","webtechw10");
 	if(!$con)
 		{
 		echo mysqli_connect_error();
 		}	
 	else
 	{
-		//echo 'connected<br>';
-		//2.construct sql statement
+		
 		$kategori=$_POST['kategori'];
 		$nama=$_POST['nama'];
 		$desc=$_POST['desc'];
@@ -38,6 +37,7 @@ function addNewCollections()
 		$sql = "insert into collections(kategori,nama,desc,date)
 		       values('$kategori','$nama','$desc','$date')";
 	    echo $sql;
+		
 		//3.run insert query
 		if(!mysqli_query($con,$sql))
 		{
@@ -52,11 +52,30 @@ function addNewCollections()
 	}
 	
 }
-	
+
+function getListOfCollection()
+{
+ //echo 'in getListOfCar()';
+ //1.create connection to database
+ $con = mysqli_connect("localhost","root",
+ "","webtechw10");
+	if(!$con)
+		{
+		echo mysqli_connect_error();
+		}
+	else
+	{
+		//echo 'connected';
+		$sql='select * from collections';
+		$qry=mysqli_query($con,$sql);
+		return $qry;
+	}
+ //2.construct sql
+ //3.execute query
+ //3.return query resuly
+
+ }
 
 
-
-$db = new db();
-
-$conn->close();
+//$con->close();
 ?>
