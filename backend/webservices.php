@@ -16,6 +16,7 @@ class db
         return $dbConnection;
     }
 }
+
 $db = new db();
 if ($_SERVER['REQUEST_METHOD'] === "GET") {
     try {
